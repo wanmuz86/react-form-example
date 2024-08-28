@@ -54,7 +54,7 @@ const ControlledExample = () => {
                     </label>
                     {isChecked && <p>User has agree to the term and condition</p>}
                 </div>
-                <button type='submit'>Submit</button>
+                <button type='submit' disabled={!isChecked}>Submit</button>
             </form>
         </div>
     )
