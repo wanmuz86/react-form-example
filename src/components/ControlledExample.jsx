@@ -5,6 +5,7 @@ const ControlledExample = () => {
     const handleForm = (e) => {
         e.preventDefault();
         console.log(name);
+        console.log(gender);
 
     }
 
@@ -25,6 +26,9 @@ const ControlledExample = () => {
         setGender(e.target.value)
     }
 
+    // Single Check box
+
+    const [isChecked, setIsChecked] = useState(false);
     return (
         <div>
             <h2>Controlled Form Example</h2>
@@ -42,6 +46,13 @@ const ControlledExample = () => {
                         }
 
                     </select>
+                </div>
+                <div>
+                    <label htmlFor="agree">
+                    <input type="checkbox" name="agree" checked={isChecked} onChange={(e)=> setIsChecked(e.target.checked)} />
+                        I  agree to the term and conditions
+                    </label>
+                    {isChecked && <p>User has agree to the term and condition</p>}
                 </div>
                 <button type='submit'>Submit</button>
             </form>
