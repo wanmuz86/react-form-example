@@ -17,15 +17,18 @@ const ReactHookForm = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <input type="text" placeholder="Name" {...register("name", { required: true })} />
-                    {errors.name && <p style={{color:'red'}}>Name is required</p>}
+                    {errors.name && <p style={{ color: 'red' }}>Name is required</p>}
                 </div>
                 <div>
-                <input type="text" placeholder="Email" {...register("email", {required: true, pattern: '//\S+@\S+\.\S+//i'})} />     
-                {errors.email && <p style={{color:'red'}}>Please fill in the email in correct format</p>}
+                    <input type="text" placeholder="Email" {...register("email", { required: true, pattern: '//\S+@\S+\.\S+//i' })} />
+                    {errors.email && <p style={{ color: 'red' }}>Please fill in the email in correct format</p>}
                 </div>
                 <div>
                     <input type="tel" placeholder="Mobile number" {...register("mobile", { required: true, minLength: 6, maxLength: 12 })} />
-                    <select {...register("title", { required: true })}>
+                    {errors.mobile && <p style={{ color: 'red' }}>Please fill in the mobile phone in correct format</p>}
+                </div>
+                <div>
+                    <select {...register("title")}>
                         <option value="Mr">Mr</option>
                         <option value="Mrs">Mrs</option>
                         <option value="Miss">Miss</option>
@@ -33,11 +36,11 @@ const ReactHookForm = () => {
                     </select>
                 </div>
                 <div>
-                    <input {...register("developer", { required: true })} type="radio" value="Yes" />
-                    <input {...register("developer", { required: true })} type="radio" value="No" />
+                    <input {...register("developer")} type="radio" value="Yes" />
+                    <input {...register("developer")} type="radio" value="No" />
                 </div>
                 <div>
-                    <select {...register("department", { required: true })}>
+                    <select {...register("department")}>
                         <option value="IT">IT</option>
                         <option value="Marketing">Marketing</option>
                         <option value="Sales">Sales</option>
