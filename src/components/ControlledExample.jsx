@@ -29,6 +29,23 @@ const ControlledExample = () => {
     // Single Check box
 
     const [isChecked, setIsChecked] = useState(false);
+
+
+    // Multiple checkboxes
+
+    // Creating the options of the checkboxes
+    const [colors, setColors] = useState([
+        {name:"Blue", isChecked:false},
+        {name:"Red", isChecked:false},
+        {name:"Green", isChecked:false},
+        {name:"Yellow", isChecked:false}
+    ]);
+
+    const handleColorChange = (color) => {
+        color.isChecked = !color.isChecked // It will be the reverse of checked
+        setColors([...colors])
+    }
+
     return (
         <div>
             <h2>Controlled Form Example</h2>
@@ -47,6 +64,7 @@ const ControlledExample = () => {
 
                     </select>
                 </div>
+
                 <div>
                     <label htmlFor="agree">
                     <input type="checkbox" name="agree" checked={isChecked} onChange={(e)=> setIsChecked(e.target.checked)} />
@@ -54,6 +72,23 @@ const ControlledExample = () => {
                     </label>
                     {isChecked && <p>User has agree to the term and condition</p>}
                 </div>
+                <div>
+                    <ul>
+                        {
+                            colors.map(val=>
+                            <li key={val.name}>
+                                <input type="checkbox" name='colors' checked={val.setIsChecked} 
+                                onChange={()=>handleColorChange(val)}/>
+                                <label>{val.name}</label>
+                            </li>)
+                        }
+                    </ul>
+                    <p>Selected colors:
+                        {colors.filter(val=>val.isChecked).map(val=><li key={val.name}>{val.name}</li>)}
+
+                    </p>
+                </div>
+
                 <button type='submit' disabled={!isChecked}>Submit</button>
             </form>
         </div>
