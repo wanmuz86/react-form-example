@@ -16,11 +16,11 @@ const UncontrolledExample = () => {
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="name">Name</label>
-                <input type="text" id='name' ref={nameRef} placeholder='Enter name'/>
+                <input type="text" id='name' ref={nameRef} placeholder='Enter name' required/>
             </div>
             <div>
                 <label htmlFor="email">Email</label>
-                <input type="email" id='email' ref={emailRef} placeholder='Enter email'/>
+                <input type="email" id='email' ref={emailRef} placeholder='Enter email' required/>
             </div>
             <button type='submit'>Submit</button>
         </form>
