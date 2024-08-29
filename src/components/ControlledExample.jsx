@@ -12,9 +12,16 @@ const ControlledExample = () => {
 
     // input  part
     const [name, setName] = useState('')
+    const [nameError, setNameError] = useState(null);
 
     const handleNameChanged = (e) => {
         setName(e.target.value)
+
+        if (name.length < 5) {
+            setNameError("Name cannot be less than 5 characters")
+        } else {
+            setNameError(null)
+        }
     }
 
     // Drop down menu
@@ -26,11 +33,9 @@ const ControlledExample = () => {
     const handleSelectChange = (e) => {
         setGender(e.target.value)
     }
-
     // Single Check box
 
     const [isChecked, setIsChecked] = useState(false);
-
 
     // Multiple checkboxes
 
@@ -46,7 +51,6 @@ const ControlledExample = () => {
         color.isChecked = !color.isChecked // It will be the reverse of checked
         setColors([...colors])
     }
-
 
     // options radio button
 
@@ -65,6 +69,7 @@ const ControlledExample = () => {
                     <label htmlFor="name">Name</label>
                     <input type="text" placeholder='Enter your name' value={name}
                         onChange={handleNameChanged} />
+                        { nameError && <p style={{color:'red'}}>{nameError}</p>}
                 </div>
                 <div>
                     <label htmlFor="gender">Gender</label>
@@ -100,12 +105,12 @@ const ControlledExample = () => {
                 </div>
                 <div>
                     {
-                    options.map(val =>
-                        <div>
-                            <input type="radio" value={val.value} name='gender' onChange={handleRadioChange} />
-                            {val.name}
-                        </div>
-                    )}
+                        options.map(val =>
+                            <div>
+                                <input type="radio" value={val.value} name='gender' onChange={handleRadioChange} />
+                                {val.name}
+                            </div>
+                        )}
                 </div>
 
                 <button type='submit' disabled={!isChecked}>Submit</button>
