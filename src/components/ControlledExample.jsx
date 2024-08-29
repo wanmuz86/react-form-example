@@ -6,6 +6,7 @@ const ControlledExample = () => {
         e.preventDefault();
         console.log(name);
         console.log(gender);
+        console.log(radioSelection);
 
     }
 
@@ -18,7 +19,7 @@ const ControlledExample = () => {
 
     // Drop down menu
 
-    const [gender,setGender] = useState("male")
+    const [gender, setGender] = useState("male")
     const options = [{ name: "Male", value: "male" }, { name: "Female", value: "female" },
     { name: "Prefer not to disclosed", value: "nondisclose" }]
 
@@ -35,16 +36,26 @@ const ControlledExample = () => {
 
     // Creating the options of the checkboxes
     const [colors, setColors] = useState([
-        {name:"Blue", isChecked:false},
-        {name:"Red", isChecked:false},
-        {name:"Green", isChecked:false},
-        {name:"Yellow", isChecked:false}
+        { name: "Blue", isChecked: false },
+        { name: "Red", isChecked: false },
+        { name: "Green", isChecked: false },
+        { name: "Yellow", isChecked: false }
     ]);
 
     const handleColorChange = (color) => {
         color.isChecked = !color.isChecked // It will be the reverse of checked
         setColors([...colors])
     }
+
+
+    // options radio button
+
+    const [radioSelection, setRadioSelection] = useState('male');
+
+    const handleRadioChange = (e) => {
+        setRadioSelection(e.target.value)
+    }
+
 
     return (
         <div>
@@ -67,7 +78,7 @@ const ControlledExample = () => {
 
                 <div>
                     <label htmlFor="agree">
-                    <input type="checkbox" name="agree" checked={isChecked} onChange={(e)=> setIsChecked(e.target.checked)} />
+                        <input type="checkbox" name="agree" checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)} />
                         I  agree to the term and conditions
                     </label>
                     {isChecked && <p>User has agree to the term and condition</p>}
@@ -75,18 +86,26 @@ const ControlledExample = () => {
                 <div>
                     <ul>
                         {
-                            colors.map(val=>
-                            <li key={val.name}>
-                                <input type="checkbox" name='colors' checked={val.setIsChecked} 
-                                onChange={()=>handleColorChange(val)}/>
-                                <label>{val.name}</label>
-                            </li>)
+                            colors.map(val =>
+                                <li key={val.name}>
+                                    <input type="checkbox" name='colors' checked={val.setIsChecked}
+                                        onChange={() => handleColorChange(val)} />
+                                    <label>{val.name}</label>
+                                </li>)
                         }
                     </ul>
                     <p>Selected colors:
-                        {colors.filter(val=>val.isChecked).map(val=><li key={val.name}>{val.name}</li>)}
-
+                        {colors.filter(val => val.isChecked).map(val => <li key={val.name}>{val.name}</li>)}
                     </p>
+                </div>
+                <div>
+                    {
+                    options.map(val =>
+                        <div>
+                            <input type="radio" value={val.value} name='gender' onChange={handleRadioChange} />
+                            {val.name}
+                        </div>
+                    )}
                 </div>
 
                 <button type='submit' disabled={!isChecked}>Submit</button>
